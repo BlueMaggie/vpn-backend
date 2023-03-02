@@ -14,5 +14,5 @@ function loadRouter(dirname) {
     })
 }
 router.redirect('/','/index.html',302)//重定向到静态页面
-router.redirect('/GetNewLink','/index.html',302)
+router.redirect('/GetNewLink','/',302)//兼容以前的链接
 module.exports = router
