@@ -20,7 +20,7 @@ const requestLink= async function()
         'invite_code':'',
         'email_code':''
     }
-    axios.post("https://www.dageyun8.com/api/v1/passport/auth/register",data)
+    axios.post("https://www.dageyun3.com/api/v1/passport/auth/register",data)
             .then((res)=>{
                 if(res.data.data.token!=null)
                 {
