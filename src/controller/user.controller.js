@@ -37,7 +37,9 @@ class UserController {
         }
         ctx.cookies.set("token",jwt.sign(args, JWT_SECRET, { //token令牌
             expiresIn: '7d', //token有效期7天
-        }))
+        }),{
+            maxAge:60*60*1000*24*7
+        })
     }
 }
 
