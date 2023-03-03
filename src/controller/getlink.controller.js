@@ -24,7 +24,7 @@ const GetNewLink =async function(ctx,next)
 const getSubFile =async function(ctx,next)
 {
     var data
-    await axios.get("https://www.dgycom.com/api/v1/client/subscribe?token="+ctx.params.token)
+    await axios.get("https://www.dgydgy.com/api/v1/client/subscribe?token="+ctx.params.token)
     .then((res)=>{
         data=res.data
     })

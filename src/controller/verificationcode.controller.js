@@ -2,6 +2,7 @@ const sendVerificationAsync = require('../util/sendverification.util')
 const {  getUserInfoByOr } = require('../service/user.service')
 const{userIsNotExist,sendVerificationError,getVerificationError}=require('../constant/err.type')
 const {createVFCode,getCodeInOneMin}=require('../service/verificationcode.service')
+const generatecvfCode=require('../util/generatevfCode.util')
 const getVerification=  async function(ctx,next){
     const  mail = ctx.request.body.mail
 
@@ -17,7 +18,7 @@ const getVerification=  async function(ctx,next){
             //用户在1分钟内没发过验证码，则发送验证码，并向数据库更新验证码
             if(! await getCodeInOneMin(result.id))
             {
-                var code=Math.floor(Math.random()*1000000)
+                var code=generatecvfCode()
                 createVFCode(result.id,code)
                 sendVerificationAsync(mail,code.toString())
                 ctx.body={
