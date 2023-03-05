@@ -47,7 +47,7 @@ const getVipLink=async function(ctx,next)
 {
     let linkobj=getNewLink()
 
-    if (link!=null) 
+    if (linkobj!=null) 
     {
         ctx.state=302
         ctx.redirect(linkobj.link)
