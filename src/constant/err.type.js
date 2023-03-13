@@ -64,4 +64,10 @@ module.exports={
         message:'token验证失败',
         result:'',
     },
+    //用户删除失败
+    deleteUserFail:{
+        code:10014,
+        message:'删除用户失败',
+        result:'',
+    },
 }

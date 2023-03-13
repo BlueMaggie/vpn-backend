@@ -1,6 +1,10 @@
 const router=require('koa-router')()
+const {auth,role}=require('../middleware/auth.middleware')
+const {getUsers,deleteUser,register,login}=require('../controller/admin.controller')
+const {rigisterParamValid,loginParamValid,loginVertify,}=require('../middleware/user.middleware')
 router.prefix('/SuperAdmin')
-router.post('/Login',async (ctx,next)=>{
-    await next()
-})
+router.post('/Login',loginParamValid,loginVertify,login)
+router.get('/getUsers',auth,role,getUsers)
+router.post('/deleteUser',auth,role,deleteUser)
+router.post('/addUser',auth,role,rigisterParamValid,register)
 module.exports=router

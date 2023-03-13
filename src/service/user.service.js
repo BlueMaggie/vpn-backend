@@ -22,7 +22,20 @@ class UserService {
         })
         return result ? result.dataValues : null
     }
-
+    //【查】 查出所有非管理员用户信息
+    async getUsersNotAdmin()
+    {
+        const result =await User.findAll({
+            where:{
+                [Op.not]:[
+                    {
+                        role:1,
+                    }
+                ]
+            }
+        })
+        return result ? result.dataValues :null
+    }
     // 【查】根据条件和 查询用户
     async getUserByAnd({ ...args }) {
         const result = await User.findOne({
@@ -32,28 +45,28 @@ class UserService {
     }
 
     // 【改】根据id更改用户信息
-    async updateById({ ...args }) {
-        const { id, ...updateOpt } = args
+    async updateByMail({ ...args }) {
+        const { mail, ...updateOpt } = args
         const result = await User.update(
             { ...updateOpt },
             {
                 where: {
-                    id,
+                    mail,
                 }
             }
         )
         return result[0] == 1 ? true : false
     }
 
-    // 删除用户
-    // async deleteUser(name) {
-    //     const result = await User.destroy({
-    //         where: {
-    //             name
-    //         }
-    //     });
-    //     return result
-    // }
+    //删除用户
+    async deleteUser(mail) {
+        const result = await User.destroy({
+            where: {
+                mail
+            }
+        });
+        return result
+    }
 }
 
 module.exports = new UserService()

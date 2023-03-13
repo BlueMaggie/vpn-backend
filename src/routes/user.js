@@ -7,8 +7,6 @@ const router = new Router({
     prefix: '/user', //给所有api前加上/user
 })
 
-// 注册接口
-router.post('/register', rigisterParamValid, auth,role, register)
 // 登录接口
 router.post('/login', loginParamValid, loginVertify, login)
 
