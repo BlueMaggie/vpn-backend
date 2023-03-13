@@ -58,8 +58,15 @@ class CodeService {
     }
 
 
-    //删除该用户的某验证码
-    
+    //删除该用户的所有验证码
+    async deleteAllVFcode(userID){
+        const result =Code.destroy({
+            where:{
+                userID
+            }
+        })
+        return result
+    }
 }
 
 module.exports = new CodeService()

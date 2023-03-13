@@ -12,7 +12,7 @@ class UserService {
     }
 
     // 【查】查询用户是否存在
-    async getUserInfoByOr({ mail }) {
+    async getUserInfoByOr( {mail} ) {
         const result = await User.findOne({
             where: {
                 [Op.or]: [
@@ -29,12 +29,12 @@ class UserService {
             where:{
                 [Op.not]:[
                     {
-                        role:1,
+                        role:1
                     }
                 ]
             }
         })
-        return result ? result.dataValues :null
+        return result ? result :null
     }
     // 【查】根据条件和 查询用户
     async getUserByAnd({ ...args }) {

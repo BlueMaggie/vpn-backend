@@ -1,6 +1,7 @@
 const jwt = require('jsonwebtoken')
-const { createUser, updateByMail, deleteUser,getUsersNotAdmin} = require('../service/user.service')
+const { createUser, updateByMail,getUserInfoByOr, deleteUser,getUsersNotAdmin} = require('../service/user.service')
 const { userRegisterError, userUpdateError,deleteUserFail,userIsNotExist } = require('../constant/err.type')
+const {deleteAllVFcode} =require('../service/verificationcode.service')
 const { JWT_SECRET } = process.env
 
 class AdminController {
@@ -43,14 +44,14 @@ class AdminController {
     //删除用户
     async deleteUser(ctx, next) {
         // 1.获取客户端请求的数据
-        const  mail  = ctx.request.body.mail
-        let user=await getUserInfoByOr(mail)
+        var  mail  = ctx.request.body.mail
+        let user=await getUserInfoByOr({mail})
         if(user==null)
         {
-            console.error(error)
             ctx.app.emit('error',userIsNotExist , ctx)
-            return
+            return 
         }
+        let res= await deleteAllVFcode(user.id)
         try {
             // 2.数据库操作
             const { res } = await deleteUser(mail)
@@ -68,10 +69,9 @@ class AdminController {
     //查询所有用户信息
     async getUsers(ctx,next)
     {
-        const users=await getUsersNotAdmin()
+        var users = await getUsersNotAdmin()
         if(users==null)
         {
-            console.error(error)
             ctx.app.emit('error',userIsNotExist , ctx)
             return
         }else{
