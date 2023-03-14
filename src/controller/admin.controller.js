@@ -57,7 +57,7 @@ class AdminController {
             const { res } = await deleteUser(mail)
             // 3.返回结果
             ctx.body = {
-                code: 0,
+                code: 200,
                 message: '删除成功',
                 result: res,
             }
