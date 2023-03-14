@@ -10,6 +10,7 @@ const User = seq.define('User', {
         unique: true,
         comment: '邮箱地址',
     },
+    
 }, {
     tableName: 'user', //表名
     timestamps: true, //启用时间戳（默认为true）

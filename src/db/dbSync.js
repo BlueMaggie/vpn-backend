@@ -1,6 +1,7 @@
 const User = require('../model/user.model')
 const Role = require('../model/role.model')
 const VerificationCode=require("../model/verificationcode.model")
+const ClientID=require('../model/clientID.model')
 //dbInit()
 //console.log("init");
 async function dbInit() {
@@ -8,7 +9,7 @@ async function dbInit() {
     await Role.sync()
     await User.sync()
     await VerificationCode.sync()
-    console.log("init");
+    await ClientID.sync()
     // 初始化数据
     const roles=await Role.findAll()
     if(roles.length==0)

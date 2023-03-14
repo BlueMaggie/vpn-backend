@@ -1,7 +1,8 @@
 const router=require('koa-router')()
 const {auth,role}=require('../middleware/auth.middleware')
-const {getUsers,deleteUser,register,login}=require('../controller/admin.controller')
+const {getUsers,deleteUser,register}=require('../controller/admin.controller')
 const {rigisterParamValid,loginParamValid,loginVertify,}=require('../middleware/user.middleware')
+const {login}=require('../controller/user.controller')
 const fs =require('fs')
 router.prefix('/SuperAdmin')
 router.get('/',async (ctx,next)=>{

@@ -1,28 +1,12 @@
 const jwt = require('jsonwebtoken')
-const { createUser, updateByMail,getUserInfoByOr, deleteUser,getUsersNotAdmin} = require('../service/user.service')
-const { userRegisterError, userUpdateError,deleteUserFail,userIsNotExist } = require('../constant/err.type')
+const { createUser,getUserInfoByOr, deleteUser,getUsersNotAdmin} = require('../service/user.service')
+const { userRegisterError,deleteUserFail,userIsNotExist } = require('../constant/err.type')
 const {deleteAllVFcode} =require('../service/verificationcode.service')
+const {deleteAllclientID,isClientIDExist}=require('../service/clientID.service')
 const { JWT_SECRET } = process.env
-
+const calcMD5Str = require('../util/calcMD5Str.util')
 class AdminController {
     
-    //用户登录[state.userInfo]
-    async login(ctx, next) {
-        // 获取用户信息（在token的playload中，记录除了password以外的全部用户信息）
-        const { vfcode,...args } = ctx.state.userInfo
-        ctx.body = {
-            code: 0,
-            message: '欢迎您，超级管理员',
-            result: {
-                user: args
-            }
-        }
-        ctx.cookies.set("token",jwt.sign(args, JWT_SECRET, { //token令牌
-            expiresIn: '30d', //token有效期7天
-        }),{
-            maxAge:60*60*1000*24*30
-        })
-    }
     //用户注册
     async register(ctx, next) {
         // 1.获取客户端请求的数据
@@ -53,6 +37,7 @@ class AdminController {
             return 
         }
         let res= await deleteAllVFcode(user.id)
+         await deleteAllclientID(user.id)
         try {
             // 2.数据库操作
             const { res } = await deleteUser(mail)

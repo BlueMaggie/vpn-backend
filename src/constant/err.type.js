@@ -70,4 +70,10 @@ module.exports={
         message:'删除用户失败',
         result:'',
     },
+    //useragent参数未知
+    useragentUnknow:{
+        code:10015,
+        message:'未知客户端',
+        result:'',
+    }
 }
