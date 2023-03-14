@@ -2,9 +2,7 @@ const jwt = require('jsonwebtoken')
 const { createUser,getUserInfoByOr, deleteUser,getUsersNotAdmin} = require('../service/user.service')
 const { userRegisterError,deleteUserFail,userIsNotExist } = require('../constant/err.type')
 const {deleteAllVFcode} =require('../service/verificationcode.service')
-const {deleteAllclientID,isClientIDExist}=require('../service/clientID.service')
-const { JWT_SECRET } = process.env
-const calcMD5Str = require('../util/calcMD5Str.util')
+const {deleteAllclientID}=require('../service/clientID.service')
 class AdminController {
     
     //用户注册
