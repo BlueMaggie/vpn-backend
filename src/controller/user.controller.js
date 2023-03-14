@@ -24,10 +24,11 @@ class UserController {
             return ctx.app.emit('error', useragentUnknow, ctx)
         }
         var secret = calcMD5Str(useragent + JWT_SECRET)
-
+        console.log(process.env.MAX_CLIENTS_NUM)
         if (! await isClientIDExist(uid, secret))//如果该客户端未登录
         {
             var clients = await getAllClientID(uid)
+            
             if (clients.length == process.env.MAX_CLIENT_NUM) {
                 deleteClientID(uid, clients[0].clientMD5)
             }
