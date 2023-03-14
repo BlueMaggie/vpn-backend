@@ -29,8 +29,9 @@ class AdminController {
         const  mail  = ctx.request.body.mail
         try {
             // 2.数据库操作
-            const { res } = await createUser(mail)
+            const  res  = await createUser(mail)
             // 3.返回结果
+            console.log(res)
             ctx.body = {
                 code: 0,
                 message: '注册成功',
